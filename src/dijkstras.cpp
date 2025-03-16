@@ -47,8 +47,14 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 }
 
 void print_path(const vector<int>& v, int total) {
+    if (total == INF) {
+        cout << endl << "Total cost is " << total << endl;
+        return;
+    }
+    
     stack<int> path_stack;
     int current = total;
+
     while (current != -1) {
         path_stack.push(current);
         if (current >= 0 && current < v.size()) {
@@ -61,6 +67,7 @@ void print_path(const vector<int>& v, int total) {
         cout << path_stack.top() << " ";
         path_stack.pop();
     }
+    
     cout << endl << "Total cost is " << total << endl;
 
 }
