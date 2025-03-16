@@ -50,7 +50,7 @@ void print_path(const vector<int>& previous, int destination) {
     vector<int> path;
     int current = destination;
 
-    while (current != -1) {
+    while (current != -1 && current < previous.size()) {
         path.push_back(current);
         current = previous[current];
     }
@@ -73,19 +73,19 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         return path; 
     }
     
-    // cout << distances[destination] << " " << endl;
-    
     if (previous[destination] == -1 && distances[destination] == 0) {
         path.push_back(destination);
+        // Print the path for source vertex
+        cout << destination << " " << endl;
+        cout << "Total cost is " << distances[destination] << endl;
         return path;
     }
     
     stack<int> path_stack;
     int curr = destination;
     
-    while (curr != -1) {
+    while (curr != -1 && curr < previous.size()) {
         path_stack.push(curr);
-
         curr = previous[curr];
     }
     
@@ -94,6 +94,12 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         path_stack.pop();
     }
 
-    print_path(previous, destination);
+    for (size_t i = 0; i < path.size(); i++) {
+        cout << path[i] << " ";
+    }
+
+    cout << endl;
+    cout << "Total cost is " << distances[destination] << endl;
+    
     return path;
 }
