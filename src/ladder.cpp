@@ -1,7 +1,7 @@
 #include "ladder.h"
 
 void error(string word1, string word2, string msg) {
-    cout << "Error: " << word1 << " and " << word2 << msg << endl;
+    cout << "Error with words: " << word1 << " and " << word2 << msg << endl;
 }
 
 // Generates the word ladder from begin_word to end_word using the provided word_list
@@ -34,6 +34,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         }
     }
     error(begin_word, end_word, "No word ladder found.");
+    return {};
 }
 
 // Call edit_distance_within to check if two words are adjacent with a distance of 1
@@ -117,6 +118,7 @@ void load_words(set<string> & word_list, const string& file_name) {
 }
 
 void print_word_ladder(const vector<string>& ladder) {
+    cout << "Word ladder found: ";
     for (const string& word : ladder) {
         cout << word << " ";
     }
