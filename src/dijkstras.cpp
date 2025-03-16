@@ -51,7 +51,11 @@ void print_path(const vector<int>& v, int total) {
     int current = total;
     while (current != -1) {
         path_stack.push(current);
-        current = v[current];
+        if (current >= 0 && current < v.size()) {
+            current = v[current];
+        } else {
+            break; // Break if index is out of bounds
+        }
     }
     while (!path_stack.empty()) {
         cout << path_stack.top() << " ";
