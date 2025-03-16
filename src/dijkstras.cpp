@@ -46,22 +46,32 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     return distance;
 }
 
-void print_path(const vector<int>& v, int total) {
-    stack<int> path_stack;
-    int current = total;
+void print_path(const vector<int>& previous, int destination) {
+    if (destination < 0 || destination >= previous.size()) {
+        cout << "Invalid vertex index" << endl;
+        return;
+    }
+    
+    vector<int> path;
+    int current = destination;
+    
     while (current != -1) {
-        path_stack.push(current);
-        if (current >= 0 && current < v.size()) {
-            current = v[current];
+        path.push_back(current);
+        if (current >= 0 && current < previous.size()) {
+            current = previous[current];
         } else {
-            break; // Break if index is out of bounds
+            break;
         }
     }
-    while (!path_stack.empty()) {
-        cout << path_stack.top() << " ";
-        path_stack.pop();
+    
+    reverse(path.begin(), path.end());
+    
+    for (size_t i = 0; i < path.size(); i++) {
+        cout << path[i] << " ";
     }
     cout << endl;
+    
+    cout << "Total cost is " << destination << endl;
 }
 
 // Extracts the shortest path from source to destination
@@ -85,6 +95,6 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         path.push_back(path_stack.top());
         path_stack.pop();
     }
-
+    cout << distances[destination] << " " << endl;
     return path;
 }
