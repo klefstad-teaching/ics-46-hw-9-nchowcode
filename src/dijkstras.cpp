@@ -50,7 +50,7 @@ void print_path(const vector<int>& previous, int destination) {
     vector<int> path;
     int current = destination;
     
-    cout << "Total cost is " << destination << endl;
+    cout << endl << "Total cost is " << destination << endl;
 }
 
 // Extracts the shortest path from source to destination
@@ -63,7 +63,7 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         return path; 
     }
     
-    cout << distances[destination] << " " << endl;
+    // cout << distances[destination] << " " << endl;
     
     if (previous[destination] == -1 && distances[destination] == 0) {
         path.push_back(destination);
@@ -87,6 +87,6 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
     for (size_t i = 0; i < path.size(); i++) {
         cout << path[i] << " ";
     }
-
+    print_path(previous, destination);
     return path;
 }
