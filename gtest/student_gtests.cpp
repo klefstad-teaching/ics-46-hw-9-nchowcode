@@ -50,13 +50,17 @@ TEST(TestDijkstra, TestShortestPath) {
     EXPECT_EQ(distances[1], 3);
     EXPECT_EQ(distances[2], 6);
     EXPECT_EQ(distances[3], 1);
+    print_path(previous, 0);
 
-  vector<int> path = extract_shortest_path(distances, previous, 3);
-  print_path(previous, 3);
+
   print_path(previous, 1);
   print_path(previous, 2);
   print_path(previous, 3);
 
+  extract_shortest_path(distances, previous, 3);
+  extract_shortest_path(distances, previous, 1);
+  extract_shortest_path(distances, previous, 0);
+  extract_shortest_path(distances, previous, 2);
 
   // EXPECT_EQ(path.size(), 2);  // Should be [0, 3] for a direct path
 }
