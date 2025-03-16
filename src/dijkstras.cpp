@@ -47,53 +47,40 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 }
 
 void print_path(const vector<int>& v, int total) {
-    if (total == INF) {
-        cout << endl << "Total cost is " << total << endl;
+    if (total < 0 || total >= v.size()) {
         return;
     }
     
     stack<int> path_stack;
-    int current = total;
-
+    int current = total; 
+    
     while (current != -1) {
         path_stack.push(current);
-        if (current >= 0 && current < v.size()) {
-            current = v[current];
-        } else {
-            break; // Break if index is out of bounds
-        }
+        current = v[current]; 
     }
+    
     while (!path_stack.empty()) {
         cout << path_stack.top() << " ";
         path_stack.pop();
     }
     
-    cout << endl << "Total cost is " << total << endl;
-
+    cout << endl;
+    cout << "Total cost is " << total << endl;
 }
 
-// Extracts the shortest path from source to destination
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination) {
     vector<int> path;
     
     if (destination < 0 || destination >= distances.size() || 
-        (previous[destination] == -1 && distances[destination] == INF)) {
+        distances[destination] == INF) {
         cout << distances[destination] << " " << endl;
         return path; 
-    }
-    
-    if (previous[destination] == -1 && distances[destination] == 0) {
-        path.push_back(destination);
-        // Print the path for source vertex
-        cout << destination << " " << endl;
-        cout << "Total cost is " << distances[destination] << endl;
-        return path;
     }
     
     stack<int> path_stack;
     int curr = destination;
     
-    while (curr != -1 && curr < previous.size()) {
+    while (curr != -1) {
         path_stack.push(curr);
         curr = previous[curr];
     }
@@ -102,11 +89,10 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
         path.push_back(path_stack.top());
         path_stack.pop();
     }
-
+    
     for (size_t i = 0; i < path.size(); i++) {
         cout << path[i] << " ";
     }
-
     cout << endl;
     cout << "Total cost is " << distances[destination] << endl;
     
